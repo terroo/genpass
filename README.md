@@ -13,13 +13,6 @@ make
 ./a.out
 ```
 
-Caso queria a versão sem a rotina de copiar(com X11), faça um checkout:
-```bash
-git checkout 447dd22
-make
-./a.out
-```
-
 ---
 
 # Projeto feito no vídeo: <https://youtu.be/Wru7t8djnto>
