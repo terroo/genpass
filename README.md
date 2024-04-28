@@ -19,3 +19,10 @@ git checkout 447dd22
 make
 ./a.out
 ```
+
+---
+
+# Projeto feito no vídeo: <https://youtu.be/Wru7t8djnto>
+![Como Criar um App Gráfico com Dear ImGui, OpenGL e SDL2](./assets/genpass.jpg) 
+
+
