@@ -13,6 +13,17 @@ make
 ./a.out
 ```
 
+# Listar todas as branchs:
+```bash
+git branch -a
+```
+> `git checkout copyx11 # Mesma versão da 'main', com a rotina de copiar para X11`
+
+Alterar pra a branch **SEM a rotina de COPIAR para X11**:
+```bash
+git checkout nocopy
+```
+
 ---
 
 # Projeto feito no vídeo: <https://youtu.be/Wru7t8djnto>
