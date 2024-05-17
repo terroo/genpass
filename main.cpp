@@ -122,7 +122,7 @@ int main(){
           copied = true;
         }
       }else{
-        ImGui::TextColored(ImVec4(1.f, 0.0f, 0.f, 1.0f), "Cópia não efetuada.");
+        ImGui::TextColored(ImVec4(1.f, 0.0f, 0.f, 1.0f), "Recurso não disponível nessa branch.");
       }
 
 
