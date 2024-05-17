@@ -1,15 +1,14 @@
 CXX=g++
 TARGET=a.out
 IMGUI_DIR = imgui
-SOURCES = main.cpp ./clip/clip.cpp ./clip/clip_x11.cpp
+SOURCES = main.cpp
 SOURCES += $(IMGUI_DIR)/imgui.cpp $(IMGUI_DIR)/imgui_demo.cpp $(IMGUI_DIR)/imgui_draw.cpp $(IMGUI_DIR)/imgui_tables.cpp $(IMGUI_DIR)/imgui_widgets.cpp
 SOURCES += $(IMGUI_DIR)/imgui_impl_sdl2.cpp $(IMGUI_DIR)/imgui_impl_opengl3.cpp
-OBJS = $(addsuffix .o, $(basename $(notdir $(SOURCES)))) clip.o clip_x11.o
+OBJS = $(addsuffix .o, $(basename $(notdir $(SOURCES))))
 UNAME_S := $(shell uname -s)
 LINUX_GL_LIBS = -lGL
 CXXFLAGS = -std=c++20 -I$(IMGUI_DIR) -I$(IMGUI_DIR)
 CXXFLAGS += -g -Wall -Wformat -fsanitize=address
-CXXFLAGS += -lxcb -lxcb-randr -lpthread
 LIBS =
 
 ifeq ($(UNAME_S), Linux) #LINUX
@@ -37,9 +36,6 @@ ifeq ($(OS), Windows_NT)
     CXXFLAGS += `pkg-config --cflags sdl2`
     CFLAGS = $(CXXFLAGS)
 endif
-
-%.o:clip/%.cpp
-	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 %.o:%.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<

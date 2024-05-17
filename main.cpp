@@ -4,7 +4,6 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_opengles2.h>
 #include "genpass.hpp"
-#include "clip/clip.h"
 
 #ifdef __EMSCRIPTEN__
 #include "imgui/emscripten_mainloop_stub.h"
@@ -120,11 +119,11 @@ int main(){
       ImGui::SetCursorPosX(pos_x);
       if(!copied){
         if( ImGui::Button("Copiar", ImVec2(400, 30)) ){
-          clip::set_text(pass);
+          ImGui::TextColored(ImVec4(0.f, 1.0f, 0.f, 1.0f), "Recurso não disponível.");
           copied = true;
         }
       }else{
-        ImGui::TextColored(ImVec4(0.f, 1.0f, 0.f, 1.0f), "Copiado!");
+        ImGui::TextColored(ImVec4(0.f, 1.0f, 0.f, 1.0f), "Cópia não efetuada.");
       }
 
 
