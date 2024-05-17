@@ -26,6 +26,13 @@ git checkout nocopy
 
 ---
 
+# Clonar SOMENTE a branch `nocopy` SEM a rotina de COPIAR do X11
+```bash
+git clone --branch nocopy --single-branch https://github.com/terroo/genpass
+```
+
+---
+
 # Projeto feito no vídeo: <https://youtu.be/Wru7t8djnto>
 ![Como Criar um App Gráfico com Dear ImGui, OpenGL e SDL2](./assets/genpass.jpg) 
 
