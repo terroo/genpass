@@ -119,11 +119,10 @@ int main(){
       ImGui::SetCursorPosX(pos_x);
       if(!copied){
         if( ImGui::Button("Copiar", ImVec2(400, 30)) ){
-          ImGui::TextColored(ImVec4(0.f, 1.0f, 0.f, 1.0f), "Recurso não disponível.");
           copied = true;
         }
       }else{
-        ImGui::TextColored(ImVec4(0.f, 1.0f, 0.f, 1.0f), "Cópia não efetuada.");
+        ImGui::TextColored(ImVec4(1.f, 0.0f, 0.f, 1.0f), "Cópia não efetuada.");
       }
 
 
