@@ -36,4 +36,10 @@ git clone --branch nocopy --single-branch https://github.com/terroo/genpass
 # Projeto feito no vídeo: <https://youtu.be/Wru7t8djnto>
 ![Como Criar um App Gráfico com Dear ImGui, OpenGL e SDL2](./assets/genpass.jpg) 
 
+---
+
+# Versão WEB
+Disponível no endereço:
+### <https://pluscpp.github.io/imgui/>
+
 
