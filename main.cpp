@@ -4,7 +4,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_opengles2.h>
 #include "genpass.hpp"
-#include "clip/clip.h"
+#include <array>
+#include "font.hpp"
 
 #ifdef __EMSCRIPTEN__
 #include "imgui/emscripten_mainloop_stub.h"
@@ -16,7 +17,7 @@ int main(){
       "C++, Dear ImGui, SDL2, e OpenGL", 
       SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 
       1280, 720, 
-      SDL_WINDOW_OPENGL | SDL_WINDOW_ALLOW_HIGHDPI
+      SDL_WINDOW_OPENGL | SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_RESIZABLE
       );
   SDL_GLContext gl_context = SDL_GL_CreateContext(window);
   SDL_GL_MakeCurrent(window, gl_context);
@@ -31,7 +32,8 @@ int main(){
   ImGui_ImplSDL2_InitForOpenGL(window, gl_context);
   ImGui_ImplOpenGL3_Init("#version 100");
 
-  ImFont * font = io.Fonts->AddFontFromFileTTF("./assets/Cantarell-Regular.ttf", 23.f);
+  //ImFont * font = io.Fonts->AddFontFromFileTTF("./assets/Cantarell-Regular.ttf", 23.f);
+  ImFont * font = io.Fonts->AddFontFromMemoryTTF((void*)data.data(), data.size(), 23.0f);
   IM_ASSERT(font != nullptr);
 
   ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
@@ -120,11 +122,10 @@ int main(){
       ImGui::SetCursorPosX(pos_x);
       if(!copied){
         if( ImGui::Button("Copiar", ImVec2(400, 30)) ){
-          clip::set_text(pass);
           copied = true;
         }
       }else{
-        ImGui::TextColored(ImVec4(0.f, 1.0f, 0.f, 1.0f), "Copiado!");
+        ImGui::TextColored(ImVec4(1.f, 0.0f, 0.f, 1.0f), "Recurso não disponível nessa branch.");
       }
 
 

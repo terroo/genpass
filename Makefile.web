@@ -1,0 +1,56 @@
+CC = emcc
+CXX = em++
+WEB_DIR = web
+EXE = $(WEB_DIR)/index.html
+IMGUI_DIR = imgui
+SOURCES = main.cpp
+SOURCES += $(IMGUI_DIR)/imgui.cpp $(IMGUI_DIR)/imgui_demo.cpp $(IMGUI_DIR)/imgui_draw.cpp $(IMGUI_DIR)/imgui_tables.cpp $(IMGUI_DIR)/imgui_widgets.cpp
+SOURCES += $(IMGUI_DIR)/imgui_impl_sdl2.cpp $(IMGUI_DIR)/imgui_impl_opengl3.cpp
+OBJS = $(addsuffix .o, $(basename $(notdir $(SOURCES))))
+UNAME_S := $(shell uname -s)
+CPPFLAGS =
+LDFLAGS =
+EMS =
+
+
+EMS += -s USE_SDL=2
+EMS += -s DISABLE_EXCEPTION_CATCHING=1
+LDFLAGS += -s WASM=1 -s ALLOW_MEMORY_GROWTH=1 -s NO_EXIT_RUNTIME=0 -s ASSERTIONS=1
+
+USE_FILE_SYSTEM ?= 0
+ifeq ($(USE_FILE_SYSTEM), 0)
+LDFLAGS += -s NO_FILESYSTEM=1
+CPPFLAGS += -DIMGUI_DISABLE_FILE_FUNCTIONS
+endif
+ifeq ($(USE_FILE_SYSTEM), 1)
+LDFLAGS += --no-heap-copy
+endif
+
+CPPFLAGS += -I$(IMGUI_DIR) -I$(IMGUI_DIR)/
+CPPFLAGS += -Wall -Wformat -Os $(EMS)
+LDFLAGS += --shell-file shell_minimal.html
+LDFLAGS += $(EMS)
+
+%.o:%.cpp
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
+
+%.o:$(IMGUI_DIR)/%.cpp
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
+
+%.o:$(IMGUI_DIR)/%.cpp
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
+
+all: $(EXE)
+	@echo Build complete for $(EXE)
+
+$(WEB_DIR):
+	mkdir $@
+
+serve: all
+	python3 -m http.server -d $(WEB_DIR)
+
+$(EXE): $(OBJS) $(WEB_DIR)
+	$(CXX) -o $@ $(OBJS) $(LDFLAGS)
+
+clean:
+	rm -rf $(OBJS) $(WEB_DIR)
